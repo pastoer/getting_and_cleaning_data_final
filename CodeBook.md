@@ -6,6 +6,7 @@ The variables can be grouped in identifiers and averages of measurements. Note t
 
 ### Identifiers
 -`subject`: ID of the subject. Integer variable ranging from 1 to 30.
+
 -`activity`: ID of the activity. String variable with the 6 (self-explaining) possible values  `WALKING`, `WALKING_UPSTAIRS`, `WALKING_DOWNSTAIRS`, `SITTING`, `STANDING`, and `LAYING`.
 
 Each row contains averaged signal measurements for each subject and activity.
