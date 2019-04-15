@@ -1,10 +1,10 @@
 ##--------------------------------------------------------------------------------------------##
 ## R-Script      : run_analysis.R
-## Author        : Pascal Toerek
+## Author        : PT
 ## Created       : 11/04/2019
 ## Last modified : 11/04/2019
-## Description   : Creates a tidy data set "tidy.txt" from data collected from the 
-##                 accelerometers from the Samsung Galaxy S smartphone. See "README.md" 
+## Description   : Creates a tidy data set "tidy.txt" from data collected from the
+##                 accelerometers from the Samsung Galaxy S smartphone. See "README.md"
 ##                 for a detailed description.
 ##--------------------------------------------------------------------------------------------##
 
@@ -16,7 +16,7 @@ library(dplyr)
 ##
 ##--------------------------------------------------------------------------------------------##
 
-## Download zip-file and unzip it if not already done 
+## Download zip-file and unzip it if not already done
 if(!file.exists("./Dataset.zip"))
 {
   zipUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -47,7 +47,7 @@ features <- read.table("./UCI HAR Dataset/features.txt", as.is = TRUE)
 ##--------------------------------------------------------------------------------------------##
 
 ## Put the training data next to each other and remove the individual tables
-trainComplete <- cbind(trainSubject, trainSet, trainLabels) 
+trainComplete <- cbind(trainSubject, trainSet, trainLabels)
 rm(trainSubject, trainSet, trainLabels)
 
 ## Put the test data next to each other and remove the individual tables
@@ -63,7 +63,7 @@ colnames(fullData) <- c("subject", features[, 2], "activity")
 
 ##--------------------------------------------------------------------------------------------##
 ##
-## Part 2: Extract only the measurements on the mean and standard deviation 
+## Part 2: Extract only the measurements on the mean and standard deviation
 ##         for each measurement
 ##
 ##--------------------------------------------------------------------------------------------##
@@ -87,8 +87,8 @@ fullData$activity <- factor(fullData$activity, activityLabels[, 1], activityLabe
 
 columnNames <- colnames(fullData)
 columnNames <- gsub("[\\(\\)-]", "", columnNames) # remove "()-"
-columnNames <- gsub("^t", "timedomain", columnNames)  
-columnNames <- gsub("^f", "frequencydomain", columnNames) 
+columnNames <- gsub("^t", "timedomain", columnNames)
+columnNames <- gsub("^f", "frequencydomain", columnNames)
 columnNames <- gsub("Acc", "Acceleration", columnNames)
 columnNames <- gsub("Gyro", "Gyroscope", columnNames)
 columnNames <- gsub("Mag", "Magnitude", columnNames)
@@ -113,4 +113,3 @@ meanValues <-  summarize_each(subjectactivity,funs(mean))
 
 # Output to file "tidy.txt"
 write.table(meanValues, "./tidy.txt", row.names = FALSE, quote = FALSE)
-
